@@ -23,6 +23,27 @@ def read_input(day: int, test: bool = False) -> list[str]:
     return list(parse(get_input_path(day, test)))
 
 
+def parse_separated(lines: list[str], separator: str = ",") -> list[str]:
+    """
+    Parse separated values from lines into a flat list.
+
+    Joins all lines and splits by separator, returning non-empty stripped values.
+
+    Args:
+        lines: Input lines
+        separator: Separator character (default: comma)
+
+    Returns:
+        List of stripped non-empty values
+
+    Example:
+        >>> parse_separated(["1,2,3", "4,5"])
+        ["1", "2", "3", "4", "5"]
+    """
+    joined = separator.join(lines)
+    return [item.strip() for item in joined.split(separator) if item.strip()]
+
+
 def run_day(
     day: int,
     parse_func: Callable[[list[str]], T],
